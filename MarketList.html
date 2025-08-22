@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <title>Market List</title>
+    <link rel="icon" href="Imagens/grocery-cart.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1><img src="Imagens/shopping-bag.png" alt="Shopping Bag"> Lista de Mercado</h1>
+        <div class="input-section">
+            <input type="number" id="quantityInput" placeholder="Qtd" min="1" value="1">
+            <input type="text" id="itemInput" placeholder="Item...">
+            <select id="categorySelect">
+                <option value="fruits">Frutas</option>
+                <option value="vegetables">Vegetais</option>
+                <option value="cleaning">Limpeza</option>
+                <option value="dairy">Laticínios</option>
+                <option value="meat">Carnes</option>
+                <option value="bakery">Padaria</option>
+                <option value="beverages">Bebidas</option>
+                <option value="snacks">Lanches</option>
+                <option value="frozen">Congelados</option>
+                <option value="canned">Enlatados</option>
+                <option value="spices">Temperos</option>
+                <option value="grains">Grãos</option>
+                <option value="personal-care">Cuidados pessoais</option>
+                <option value="other">Outros</option>
+            </select>
+            <input type="text" id="weightInput" placeholder="Peso (opcional)">
+            <input type="text" id="priceInput" placeholder="Valor (opcional)">
+            <button onclick="addItem()">Adicionar</button>
+            <button onclick="sharePage()">Compartilhar Lista</button>
+            <button onclick="saveListWithName()">Salvar Lista com Nome</button>
+            <button onclick="loadListByName()">Carregar Lista Salva</button>
+        </div>
+        <div class="list-section">
+            <div class="list-header">
+                <div>Quantidade</div>
+                <div>Item</div>
+                <div>Seção</div>
+                <div>Peso</div>
+                <div>Valor</div>
+                <div>Ação</div>
+            </div>
+            <div id="marketList"></div>
+        </div>
+        <div class="total-section">
+            <h2>Total de itens: <span id="totalItems">0</span></h2>
+            <h2>Total da compra: <span id="totalPrice">R$ 0,00</span></h2>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
