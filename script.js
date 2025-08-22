@@ -3,6 +3,32 @@ let editingIndex = -1;
 
 // Carregar itens do localStorage se existirem
 function loadItems() {
+    // Verificar se há dados na URL (compartilhamento)
+    const urlParams = new URLSearchParams(window.location.search);
+    const sharedData = urlParams.get('data');
+    
+    if (sharedData) {
+        try {
+            // Decodificar e analisar os dados compartilhados
+            const decodedData = decodeURIComponent(sharedData);
+            items = JSON.parse(decodedData);
+            // Limpar parâmetros da URL para evitar recarregar os mesmos dados
+            window.history.replaceState({}, document.title, window.location.pathname);
+        } catch (e) {
+            console.error('Erro ao carregar dados compartilhados:', e);
+            // Se der erro, carregar do localStorage
+            loadFromLocalStorage();
+        }
+    } else {
+        loadFromLocalStorage();
+    }
+    
+    renderItems();
+    updateTotals();
+}
+
+// Carregar do localStorage
+function loadFromLocalStorage() {
     const savedItems = localStorage.getItem('marketListItems');
     if (savedItems) {
         try {
@@ -12,8 +38,6 @@ function loadItems() {
             items = [];
         }
     }
-    renderItems();
-    updateTotals();
 }
 
 // Salvar itens no localStorage
@@ -135,21 +159,58 @@ function renderItems() {
     });
 }
 
-// Compartilhar a página
+// Compartilhar a página COM OS DADOS
 function sharePage() {
-    const url = window.location.href;
+    // Codificar os dados da lista para URL
+    const jsonData = JSON.stringify(items);
+    const encodedData = encodeURIComponent(jsonData);
+    
+    // Criar URL com os dados
+    const currentUrl = window.location.href.split('?')[0]; // Remover parâmetros existentes
+    const shareUrl = `${currentUrl}?data=${encodedData}`;
+    
+    // Verificar se a API de compartilhamento está disponível
     if (navigator.share) {
         navigator.share({
-            title: document.title,
-            url: url
+            title: 'Minha Lista de Compras - Market List',
+            text: 'Confira minha lista de compras!',
+            url: shareUrl
+        }).then(() => {
+            console.log('Lista compartilhada com sucesso!');
+        }).catch(err => {
+            console.error('Erro ao compartilhar:', err);
+            copyToClipboard(shareUrl);
         });
     } else {
-        navigator.clipboard.writeText(url).then(function() {
-            alert('Link copiado para a área de transferência!');
-        }, function() {
-            alert('Não foi possível copiar o link.');
-        });
+        // Fallback para copiar para a área de transferência
+        copyToClipboard(shareUrl);
     }
+}
+
+// Copiar URL para a área de transferência
+function copyToClipboard(url) {
+    navigator.clipboard.writeText(url).then(() => {
+        alert('Link da lista copiado! Agora você pode compartilhar com sua tia!');
+    }).catch(err => {
+        // Fallback para métodos mais antigos
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                alert('Link da lista copiado! Agora você pode compartilhar com sua tia!');
+            } else {
+                alert('Não foi possível copiar o link. Tente manualmente: ' + url);
+            }
+        } catch (err) {
+            alert('Não foi possível copiar o link. Tente manualmente: ' + url);
+        }
+        
+        document.body.removeChild(textArea);
+    });
 }
 
 // Salvar a lista com nome escolhido pelo usuário
