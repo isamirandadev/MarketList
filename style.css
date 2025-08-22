@@ -303,24 +303,20 @@ h1 img {
         max-width: 98vw;
         padding: 8px 2vw 16px 2vw;
     }
+
     .list-header,
     .list-item {
+        display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
-        font-size: 0.98rem;
+        font-size: 0.95rem;
         padding: 10px 8px;
     }
+
     .list-header > div,
     .list-item > * {
         justify-content: flex-start;
         text-align: left;
-    }
-    .list-header {
-        font-size: 1rem;
-    }
-    .list-header > div:nth-child(n+3),
-    .list-item > :nth-child(n+3):not(.item-check-row) {
-        display: none;
     }
 }
 
@@ -328,18 +324,21 @@ h1 img {
     .container {
         padding: 2vw 1vw 10px 1vw;
     }
+
     .list-header,
     .list-item {
         display: flex;
         flex-direction: column;
         gap: 6px;
-        padding: 8px 4px;
+        padding: 8px 6px;
     }
+
     .list-header > div,
     .list-item > * {
         width: 100%;
         text-align: left;
     }
+
     .total-section {
         font-size: 1rem;
         padding: 10px 4px;
