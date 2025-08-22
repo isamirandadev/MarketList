@@ -9,7 +9,12 @@
 </head>
 <body>
     <div class="container">
-        <h1><img src="Imagens/shopping-bag.png" alt="Shopping Bag"> Lista de Mercado</h1>
+        <h1>
+            <img src="Imagens/shopping-bag.png" alt="Shopping Bag"> 
+            Lista de Mercado
+        </h1>
+
+        <!-- Seção de inputs -->
         <div class="input-section">
             <input type="number" id="quantityInput" placeholder="Qtd" min="1" value="1">
             <input type="text" id="itemInput" placeholder="Item...">
@@ -33,10 +38,12 @@
             <input type="text" id="priceInput" placeholder="Valor (opcional)">
             <button onclick="addItem()">Adicionar</button>
             <button onclick="sharePage()">Compartilhar Lista</button>
-            <button onclick="saveListWithName()">Salvar Lista com Nome</button>
-            <button onclick="loadListByName()">Carregar Lista Salva</button>
+            <button onclick="saveListWithName()">Salvar Lista</button>
+            <button onclick="loadListByName()">Carregar Lista</button>
         </div>
-        <div class="list-section">
+
+        <!-- Lista -->
+        <div class="list-container">
             <div class="list-header">
                 <div>Quantidade</div>
                 <div>Item</div>
@@ -47,11 +54,14 @@
             </div>
             <div id="marketList"></div>
         </div>
+
+        <!-- Totais -->
         <div class="total-section">
             <h2>Total de itens: <span id="totalItems">0</span></h2>
             <h2>Total da compra: <span id="totalPrice">R$ 0,00</span></h2>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
