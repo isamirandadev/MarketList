@@ -278,18 +278,20 @@ h1 img {
     transition: background 0.2s, opacity 0.2s;
 }
 
-/* Total section */
-.total-section {
-    margin-top: 18px;
-    background: #f3f6fa;
-    border-radius: 12px;
-    padding: 18px 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.2rem;
+/* Footer */
+
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%; /* Centraliza em relação à largura da tela */
+    transform: translateX(-50%); /* Ajusta para alinhar ao centro */
+    width: 739px ; /* Mantém o tamanho que você definiu */
+    background-color: #f3f6fa;
     color: #2c3e50;
+    text-align: center;
+    padding: 10px 0;
     font-weight: bold;
+    font-size: 1.2rem;
 }
 
 #totalItems, #totalPrice {
